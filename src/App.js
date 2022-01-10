@@ -115,9 +115,11 @@ const TermSelector = ({term, setTerm}) => (
 
 const Course = ({ course, selected, setSelected }) => {
   const isSelected = selected.includes(course);
-  const style = { backgroundColor: isSelected ? "#D7C9F2" : "white" };
+  const isDisabled = !isSelected && hasConflict(course, selected);
+  const style = { backgroundColor: isDisabled ? 'lightgrey' : isSelected ? "#D7C9F2" : "white" };
   return (
-    <div className="card m-1 p-1" style={style} onClick={() => setSelected(toggle(course, selected))}>
+    <div className="card m-1 p-1" style={style} 
+      onClick={isDisabled ? null : () => setSelected(toggle(course, selected))}>
       <div className="card-body">
         <div className="card-title"> {getCourseTerm(course)} CS {getCourseNumber(course)} </div>
         <div className="card-text"> {course.title} </div>
