@@ -52,4 +52,4 @@ const addScheduleTimes = (schedule) => ({
   courses: mapValues(addCourseTimes, schedule.courses),
 });
 
-export {terms, days, hasConflict, getCourseTerm, addScheduleTimes};
+export {terms, days, hasConflict, getCourseTerm, addScheduleTimes, timeParts};
