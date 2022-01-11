@@ -21,4 +21,35 @@ const hasConflict = (course, selected) =>
 
 const getCourseTerm = (course) => terms[course.id.charAt(0)];
 
-export {terms, days, hasConflict, getCourseTerm};
+const mapValues = (fn, obj) =>
+  Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => [key, fn(value)])
+  );
+
+const meetsPat =
+  /^ *((?:M|Tu|W|Th|F)+) +(\d\d?):(\d\d) *[ -] *(\d\d?):(\d\d) *$/;
+
+const timeParts = (meets) => {
+  const [match, days, hh1, mm1, hh2, mm2] = meetsPat.exec(meets) || [];
+  return !match
+    ? {}
+    : {
+        days,
+        hours: {
+          start: hh1 * 60 + mm1 * 1,
+          end: hh2 * 60 + mm2 * 1,
+        },
+      };
+};
+
+const addCourseTimes = (course) => ({
+  ...course,
+  ...timeParts(course.meets),
+});
+
+const addScheduleTimes = (schedule) => ({
+  title: schedule.title,
+  courses: mapValues(addCourseTimes, schedule.courses),
+});
+
+export {terms, days, hasConflict, getCourseTerm, addScheduleTimes};

@@ -39,7 +39,7 @@ const TermButton = ({ term, checked, setTerm }) => (
       onChange={() => setTerm(term)}
       checked={checked}
     />
-    <label class="btn btn-success m-0 p-2" htmlFor={term}>
+    <label className="btn btn-success m-0 p-2" htmlFor={term}>
       {term}
     </label>
   </>
