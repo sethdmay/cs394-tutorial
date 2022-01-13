@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { signInWithGoogle, signOut, useUserState } from "../utilities/firebase.js";
+import {
+  signInWithGoogle,
+  signOut,
+  useUserState,
+} from "../utilities/firebase.js";
 import { getCourseTerm, terms } from "../utilities/times.js";
-import Course from './Course.js';
-
-
-
+import Course from "./Course.js";
 
 const CourseList = ({ courses }) => {
   const [term, setTerm] = useState("Fall");
@@ -31,16 +32,16 @@ const CourseList = ({ courses }) => {
 };
 
 const SignInButton = () => (
-  <button className="btn btn-secondary btn-sm" onClick={() => signInWithGoogle()}>
+  <button
+    className="btn btn-secondary btn-sm"
+    onClick={() => signInWithGoogle()}
+  >
     Sign In
   </button>
 );
 
 const SignOutButton = () => (
-  <button
-    className="btn btn-secondary btn-sm"
-    onClick={() => signOut()}
-  >
+  <button className="btn btn-secondary btn-sm" onClick={() => signOut()}>
     Sign Out
   </button>
 );
@@ -75,7 +76,7 @@ const TermSelector = ({ term, setTerm }) => {
           />
         ))}
       </div>
-      { user ? <SignOutButton /> : <SignInButton /> }
+      {user ? <SignOutButton /> : <SignInButton />}
     </div>
   );
 };
